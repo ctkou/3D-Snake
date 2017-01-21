@@ -4,24 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameStateController : MonoBehaviour {
-  private int score;
-  public Text displayText;
+    private int score;
+    public Text displayText;
+    public Text gameOverMessage;
+
 
 	// Use this for initialization
 	void Start () {
 		score = 0;
 		addScore(0);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-  public void addScore(int n) {
-      Debug.Log("addScore");
-      score += n;
-      displayText.text = "Score: " + score.ToString();
-  }
+    public void addScore(int n) {
+        Debug.Log("addScore");
+        score += n;
+        displayText.text = "Score: " + score.ToString();
+    }
 
+    public void showGameOverMessage(bool isShown) {
+        gameOverMessage.gameObject.SetActive(isShown);
+    }
 }

@@ -26,17 +26,20 @@ public class SnakeHeadController : MonoBehaviour {
                 gameStateController.addScore(5);
             } else {
                 isGameOver = true;
+                gameStateController.showGameOverMessage(true);
             }
         }
     }
 
-    // Use this for initialization
-    void Start() {
+    public void resetSnake() {
+        isGameOver = false;
+        gameStateController.showGameOverMessage(false);
 
-        gameStateController  = (GameStateController) gameState.GetComponent(typeof(GameStateController));
-
-        // add this game object as the first body section
-        snakeBodySections.Add(gameObject);
+        // destroy original body and tail
+        if (snakeBodySections.Count > 1) {
+            Destroy(snakeBodySections[1]);
+            snakeBodySections.RemoveRange(1, snakeBodySections.Count - 1);
+        }
 
         // create body part
         GameObject snakeBodySection = Instantiate(snakeBodyPrefab);
@@ -45,6 +48,20 @@ public class SnakeHeadController : MonoBehaviour {
         // create tail
         GameObject snakeTail = Instantiate(snakeTailPrefab);
         AddPartToLastJoint(snakeTail);
+
+        // reset head position
+        snakeBodySections[0].transform.position = new Vector3();
+        snakeBodySections[0].transform.rotation = new Quaternion();
+    }
+
+    // Use this for initialization
+    void Start() {
+        gameStateController  = (GameStateController) gameState.GetComponent(typeof(GameStateController));
+
+        // add this game object as the first body section
+        snakeBodySections.Add(gameObject);
+
+        resetSnake();
     }
 
     // Update is called once per frame
