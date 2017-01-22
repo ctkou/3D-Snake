@@ -12,7 +12,7 @@ public class SnakeHeadController : MonoBehaviour {
 
     private int step = 0;
     private string lastPressedKey = "";
-    private int updateFrequency = 20;
+    private int updateFrequency = 5;
     private bool isGameOver = false;
 
     // Snake body parts 
@@ -20,13 +20,18 @@ public class SnakeHeadController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
 		GameObject go = other.gameObject;
-
+		Debug.Log ("Snake: " + go.name);
 		if (!go.CompareTag ("Trigger")) {
-            if (go.name.Equals("Fruit")) {
-                GameObject newBodySection = Instantiate(snakeBodyPrefab);
-                AddBodyBeforeTail(newBodySection);
-                Destroy(go);
-                gameStateController.addScore(5);
+			if (go.name.Equals ("Fruit")) {
+				GameObject newBodySection = Instantiate (snakeBodyPrefab);
+				AddBodyBeforeTail (newBodySection);
+				Destroy (go);
+				gameStateController.addScore (5);
+			} else if (go.CompareTag ("Fire")) {
+				// TODO maybe just chop off or burn the tail?
+				// but for now...
+				isGameOver = true;
+				gameStateController.showGameOverMessage (true);
 			} else if (!go.name.Equals("Body_Section_1")) {
                 isGameOver = true;
                 gameStateController.showGameOverMessage(true);
