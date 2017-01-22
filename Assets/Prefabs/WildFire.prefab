@@ -59,7 +59,6 @@ GameObject:
   - component: {fileID: 198821757633047838}
   - component: {fileID: 199334826527209322}
   - component: {fileID: 114678496790209482}
-  - component: {fileID: 114939343244559986}
   m_Layer: 0
   m_Name: WildFire
   m_TagString: Fire
@@ -168,19 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae522dcdf78a742cfa13936756f6c694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 0
---- !u!114 &114939343244559986
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1582676452356430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae522dcdf78a742cfa13936756f6c694, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 0
+  gameState: {fileID: 1957471516099622, guid: bafb124ec77554b5280fe936fb629271, type: 2}
 --- !u!198 &198293353168749334
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class TriggerController : MonoBehaviour {
 
-	public GameObject gameState;
-
 	public bool entered;
-	private GameStateController gameStateController;
+
+	public GameObject gameState;
+	private static GameStateController gameStateController;
 
 	Color colorNormal = new Color(0.328f, 1f, 0.169f, 0.422f);
 	Color colorEntered = new Color(1f, 0.1f, 0.08f, 0.75f);

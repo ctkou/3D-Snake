@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f22735fdb54458188f2ffed34fa551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: {fileID: 1353390248997506, guid: 07b7eb3078c8f49feb3754ae2ff2dacd, type: 2}
+  gameState: {fileID: 1957471516099622, guid: bafb124ec77554b5280fe936fb629271, type: 2}
   entered: 0
 --- !u!135 &135375969866011618
 SphereCollider:

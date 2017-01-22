@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class SnakeHeadController : MonoBehaviour {
+public class SnakeHeadController : NetworkBehaviour {
     // prefabs
     public GameObject snakeBodyPrefab;
 	public GameObject snakeTailPrefab;
-    public GameObject gameState;
 	public GameObject fireball;
 
-    private GameStateController gameStateController;
+	private static GameObject gameState;
+	private static GameStateController gameStateController;
 	private WildFireController wildFireController;
 
     private int step = 0;
@@ -60,26 +61,31 @@ public class SnakeHeadController : MonoBehaviour {
         AddPartToLastJoint(snakeTail);
 
         // reset head position
-        snakeBodySections[0].transform.position = new Vector3();
+		snakeBodySections[0].transform.position = new Vector3(Random.Range(-22, 22), Random.Range(-22, -22), Random.Range(-22,22));
         snakeBodySections[0].transform.rotation = new Quaternion();
     }
 
     // Use this for initialization
-    void Start() {
+	void Start() {
+		gameState = GameStateController.getInstance();
         gameStateController  = (GameStateController) gameState.GetComponent(typeof(GameStateController));
 		wildFireController  = (WildFireController) fireball.GetComponent(typeof(WildFireController));
+		Camera.main.GetComponent<CameraController>().setTarget(gameObject.transform);
 
-        // add this game object as the first body section
+		// add this game object as the first body section
         snakeBodySections.Add(gameObject);
 
         resetSnake();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (!isGameOver)
-        {
+    void Update() {
+		
+		if (!isLocalPlayer) {
+			return;
+		}
+
+        if (!isGameOver) {
             if (Input.GetKeyDown(KeyCode.W))
             {
                 lastPressedKey = "W";

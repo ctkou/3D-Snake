@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameStateController : MonoBehaviour {
+	private static GameObject instance;
+
     private int score;
     public Text gameOverMessage, gameWinMessage;
     
@@ -11,8 +13,13 @@ public class GameStateController : MonoBehaviour {
 
 	public int hitCounts;
 
+	public static GameObject getInstance() {
+		return instance;
+	}
+
 	// Use this for initialization
 	void Start () {
+		instance = gameObject;
 		hitCounts = 0;
 		score = 0;
 		addScore(0);

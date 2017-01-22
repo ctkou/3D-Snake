@@ -5,7 +5,6 @@ using UnityEngine;
 public class WildFireController : MonoBehaviour {
 
 	public GameObject gameState;
-
 	private GameStateController gameStateController;
 	private ParticleSystem ps;
 	private float horizontal;
