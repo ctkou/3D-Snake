@@ -7,8 +7,10 @@ public class SnakeHeadController : MonoBehaviour {
     public GameObject snakeBodyPrefab;
 	public GameObject snakeTailPrefab;
     public GameObject gameState;
+	public GameObject fireball;
 
     private GameStateController gameStateController;
+	private WildFireController wildFireController;
 
     private int step = 0;
     private string lastPressedKey = "";
@@ -27,7 +29,7 @@ public class SnakeHeadController : MonoBehaviour {
 				AddBodyBeforeTail (newBodySection);
 				Destroy (go);
 				gameStateController.addScore (5);
-			} else if (go.CompareTag ("Fire")) {
+			} else if (go.CompareTag ("Fire") && wildFireController.isActive()) {
 				// TODO maybe just chop off or burn the tail?
 				// but for now...
 				isGameOver = true;
@@ -65,6 +67,7 @@ public class SnakeHeadController : MonoBehaviour {
     // Use this for initialization
     void Start() {
         gameStateController  = (GameStateController) gameState.GetComponent(typeof(GameStateController));
+		wildFireController  = (WildFireController) fireball.GetComponent(typeof(WildFireController));
 
         // add this game object as the first body section
         snakeBodySections.Add(gameObject);
