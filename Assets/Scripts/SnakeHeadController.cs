@@ -5,8 +5,9 @@ using UnityEngine;
 public class SnakeHeadController : MonoBehaviour {
     // prefabs
     public GameObject snakeBodyPrefab;
-    public GameObject snakeTailPrefab;
+	public GameObject snakeTailPrefab;
     public GameObject gameState;
+
     private GameStateController gameStateController;
 
     private int step = 0;
@@ -18,17 +19,21 @@ public class SnakeHeadController : MonoBehaviour {
     private List<GameObject> snakeBodySections = new List<GameObject>();
 
     void OnTriggerEnter(Collider other) {
-        if (!other.gameObject.name.Equals("Body_Section_1")) {
-            if (other.gameObject.name.Equals("Fruit")) {
+		GameObject go = other.gameObject;
+
+		if (!go.CompareTag ("Trigger")) {
+            if (go.name.Equals("Fruit")) {
                 GameObject newBodySection = Instantiate(snakeBodyPrefab);
                 AddBodyBeforeTail(newBodySection);
-                Destroy(other.gameObject);
+                Destroy(go);
                 gameStateController.addScore(5);
-            } else {
+			} else if (!go.name.Equals("Body_Section_1")) {
                 isGameOver = true;
             }
         }
     }
+
+
 
     // Use this for initialization
     void Start() {
